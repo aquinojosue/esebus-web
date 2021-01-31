@@ -1,4 +1,6 @@
 import React, { useEffect, useState } from "react";
+import useGeolocation from "../Hooks/useGeolocation";
+import rutas from "../Data/rutas.json";
 import {
   MapContainer,
   MapConsumer,
@@ -6,9 +8,6 @@ import {
   TileLayer,
   ZoomControl
 } from "react-leaflet";
-import Fab from "@material-ui/core/Fab";
-import NavigationIcon from "@material-ui/icons/Navigation";
-import useGeolocation from "../Hooks/useGeolocation";
 export default function Mapa(props) {
   const [location, setLocation] = useState({
     default: true,
@@ -27,25 +26,28 @@ export default function Mapa(props) {
     }
   }
   const zoom = 14;
-  const hollywoodStudiosPolygon = [
-    [
-      [28.35390453844, -81.56443119049],
-      [28.35390453844, -81.55619144439],
-      [28.35983376526, -81.55619144439],
-      [28.35983376526, -81.56443119049],
-      [28.35390453844, -81.56443119049]
-    ]
-  ];
+  const center = [13.735461, -89.08062];
+  const color = rutas[0].colorVuelta;
 
   return (
     <>
-      <h2>Hola</h2>
-      <MapContainer center={location.location} zoom={zoom} zoomControl={false}>
+      <MapContainer center={center} zoom={zoom} zoomControl={false}>
         <TileLayer
           attribution="&copy; Elesteam"
-          url="https://api.maptiler.com/maps/basic/256/{z}/{x}/{y}.png?key=fXmTwJM642uPLZiwzhA1"
+          url="http://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png"
         />
-        <Polyline color="blue" positions={hollywoodStudiosPolygon} />
+        <Polyline
+          color={color}
+          positions={[
+            rutas[0].rutaVuelta.map((direccion) => [direccion[1], direccion[0]])
+          ]}
+        />
+        <Polyline
+          color={rutas[0].colorIda}
+          positions={[
+            rutas[0].rutaIda.map((direccion) => [direccion[1], direccion[0]])
+          ]}
+        />
         <MapConsumer>
           {(map) => {
             if (!location.default)
@@ -55,13 +57,14 @@ export default function Mapa(props) {
           }}
         </MapConsumer>
 
-        {/*<div className="leaflet-bottom leaflet-left">
-        <Fab variant="extended" className="leaflet-control" onClick={localizar}>
-          <NavigationIcon />
-          Navigate
-        </Fab>
-      </div>*/}
-        <ZoomControl position="bottomleft" />
+        {
+          <div className="leaflet-bottom leaflet-right">
+            <ZoomControl className="leaflet-control" position="bottomleft" />
+            <button className="leaflet-control" onClick={localizar}>
+              Algo
+            </button>
+          </div>
+        }
       </MapContainer>
     </>
   );

@@ -1,7 +1,7 @@
-.App {
+/*.App {
   font-family: sans-serif;
   text-align: center;
-}
+}*/
 
 .leaflet-container {
   width: 100%;
@@ -11,18 +11,4 @@
   z-index: -2;
   left: 0px;
   top: 0px;
-}
-.filterSubwayLines {
-  position: absolute;
-  top: 10px;
-  z-index: 10;
-  width: 200px;
-  height: auto;
-  background: hsla(0, 100%, 100%, 0.8);
-  margin: 10px;
-  font-family: sans-serif;
-  font-size: 13px;
-  padding: 5px;
-  padding-bottom: 10px;
-  border-radius: 5px;
 }

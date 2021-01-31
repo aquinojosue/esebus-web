@@ -1,24 +1,20 @@
 import "./styles.css";
 import React from "react";
 import Mapa from "./Components/Mapa";
-import AppBar from "@material-ui/core/AppBar";
-import Toolbar from "@material-ui/core/Toolbar";
-import Typography from "@material-ui/core/Typography";
-import IconButton from "@material-ui/core/IconButton";
-import MenuIcon from "@material-ui/icons/Menu";
+import rutas from "./Data/rutas.json";
 
 export default function App() {
   return (
     <div>
-      <AppBar position="static">
-        <Toolbar>
-          <IconButton edge="start" color="inherit" aria-label="menu">
-            <MenuIcon />
-          </IconButton>
-          <Typography variant="h6">EseBus</Typography>
-        </Toolbar>
-      </AppBar>
-      <Mapa />
+      <div className="p-6 max-w-sm mx-auto bg-white rounded-xl shadow-md flex items-center space-x-4">
+        <div className="flex-shrink-0">
+          <img className="h-12 w-12" src="/img/logo.svg" alt="ChitChat Logo" />
+        </div>
+        <div>
+          <div className="text-xl font-medium text-black">ChitChat</div>
+          <p className="text-gray-500">You have a new message!</p>
+        </div>
+      </div>
     </div>
   );
 }
