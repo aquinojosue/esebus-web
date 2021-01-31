@@ -1,20 +1,34 @@
-import "./styles.css";
-import React from "react";
-import Mapa from "./Components/Mapa";
-import rutas from "./Data/rutas.json";
+import './styles.css';
+import React from 'react';
+import Mapa from './Components/Mapa';
+import rutas from './Data/rutas.json';
+import Checkbox from './Components/Checkbox';
 
+//https://stackoverflow.com/questions/60482018/make-a-sidebar-from-react-bootstrap
 export default function App() {
-  return (
-    <div>
-      <div className="p-6 max-w-sm mx-auto bg-white rounded-xl shadow-md flex items-center space-x-4">
-        <div className="flex-shrink-0">
-          <img className="h-12 w-12" src="/img/logo.svg" alt="ChitChat Logo" />
-        </div>
-        <div>
-          <div className="text-xl font-medium text-black">ChitChat</div>
-          <p className="text-gray-500">You have a new message!</p>
-        </div>
-      </div>
-    </div>
-  );
+	return (
+		<div className="flex bg-gray-100">
+			<aside className="bg-white w-64 min-h-screen flex flex-col">
+				<span className="text-blue py-2">EseBus</span>
+				<div className="border-r flex-grow">
+					<h2>Rutas:</h2>
+					<nav>
+						<ul className="list-disc">
+							{rutas.map((ruta, index) => (
+								<li key={index}>
+									<Checkbox label={ruta.nombreRuta} />
+								</li>
+							))}
+						</ul>
+					</nav>
+				</div>
+			</aside>
+			<main className="flex-grow flex flex-col min-h-screen">
+				<header className="bg-white border-b h-10 flex items-center justify-between">
+					<h1>Home</h1>
+				</header>
+				<Mapa />
+			</main>
+		</div>
+	);
 }

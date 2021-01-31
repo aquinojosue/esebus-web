@@ -8,6 +8,7 @@
     "@tailwindcss/postcss7-compat": "^2.0.2",
     "autoprefixer": "^9.8.6",
     "craco": "0.0.3",
+    "eslint-loader": "^4.0.2",
     "leaflet": "1.7.1",
     "postcss": "^7.0.35",
     "react": "17.0.1",
@@ -15,6 +16,7 @@
     "react-icons": "4.1.0",
     "react-leaflet": "3.0.5",
     "react-scripts": "4.0.0",
+    "tailwind-react-ui": "^0.8.1",
     "tailwindcss": "npm:@tailwindcss/postcss7-compat@^2.0.2"
   },
   "devDependencies": {
