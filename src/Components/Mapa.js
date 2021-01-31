@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
 import useGeolocation from "../Hooks/useGeolocation";
 import rutas from "../Data/rutas.json";
+import RouteInfo from "./RouteInfo";
+
 import {
   MapContainer,
   MapConsumer,
@@ -36,18 +38,27 @@ export default function Mapa(props) {
           attribution="&copy; Elesteam"
           url="http://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png"
         />
-        <Polyline
-          color={color}
-          positions={[
-            rutas[0].rutaVuelta.map((direccion) => [direccion[1], direccion[0]])
-          ]}
-        />
-        <Polyline
-          color={rutas[0].colorIda}
-          positions={[
-            rutas[0].rutaIda.map((direccion) => [direccion[1], direccion[0]])
-          ]}
-        />
+        {
+          props.routes.map((ruta, index)=>{
+            return(
+              (ruta.shown)?
+              <div key={index}>
+                <Polyline
+                  color={ruta.colorVuelta}
+                  positions={[
+                  ruta.rutaVuelta.map((direccion) => [direccion[1], direccion[0]])
+                ]}
+                />
+                <Polyline
+                  color={ruta.colorIda}
+                  positions={[
+                    ruta.rutaIda.map((direccion) => [direccion[1], direccion[0]])
+                  ]}
+                />
+              </div>:""
+            )
+          })
+        }
         <MapConsumer>
           {(map) => {
             if (!location.default)
@@ -57,12 +68,15 @@ export default function Mapa(props) {
           }}
         </MapConsumer>
 
+        <ZoomControl className="leaflet-control" position="bottomleft" />
         {
           <div className="leaflet-bottom leaflet-right">
-            <ZoomControl className="leaflet-control" position="bottomleft" />
-            <button className="leaflet-control" onClick={localizar}>
+            {/*
+            <RouteInfo routes={props.routes} className="leaflet-control"/>
+              <button className="leaflet-control" onClick={localizar}>
               Algo
             </button>
+            */}
           </div>
         }
       </MapContainer>

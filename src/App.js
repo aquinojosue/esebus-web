@@ -1,33 +1,86 @@
 import './styles.css';
-import React from 'react';
+import React, {useState} from 'react';
 import Mapa from './Components/Mapa';
 import rutas from './Data/rutas.json';
 import Checkbox from './Components/Checkbox';
+import RouteInfo from './Components/RouteInfo'
 
-//https://stackoverflow.com/questions/60482018/make-a-sidebar-from-react-bootstrap
 export default function App() {
+  const [routes, setRoutes] = useState([...rutas]);
+  const [checkAll, setCheckAll] = useState(false);
+  function handleCheck(index){
+	const newRoutes = [...routes];
+	const item = {...newRoutes[index]}
+	item.shown = !item.shown;
+	newRoutes[index] = item;
+	setRoutes(newRoutes);
+  }
+  function handleAllCheck(){
+	const newState = !checkAll;
+	const newRoutes = [...routes].map((ruta)=>{
+		ruta.shown = newState;
+		return ruta;
+	});
+	setRoutes(newRoutes)
+	setCheckAll(newState);
+  }
 	return (
-		<div className="flex bg-gray-100">
-			<aside className="bg-white w-64 min-h-screen flex flex-col">
+		<div className="flex flex-wrap px-3 sm:px-0 sm:grid sm:grid-cols-4">
+			<div className="w-full sm:w-auto sm:col-span-2 lg:col-span-1 h-auto sm:mx-5">
+				<div className="flex flex-col h-auto sm:h-screen">
+					<div classname="pt-3">
+						<div className="flex flex-wrap cursor-pointer">
+							Aqui ira el logo xd
+						</div>
+						<div className="h-auto w-full border border-green-500 mt-5">
+							<div className="mx-5 py-5">
+								<h3 className="text-green-600 font-bold">Seleccione una ruta</h3>
+								<ul>
+									<li className="pt-2">
+										<Checkbox  label="Show All" handleCheck={handleAllCheck} value={checkAll}/>
+									</li>
+									{routes.map((ruta, index) => (
+										<div className="pt-2">
+										<li key={index}>
+											<Checkbox label={ruta.nombreRuta} handleCheck={handleCheck} index={index} value={ruta.shown}/>
+										</li>
+										</div>
+									))}
+								</ul>
+							</div>
+						</div>
+					</div>
+					{
+						(routes.some(r=>r.shown)) ? 
+							<div className="flex mt-5 text-gray-600">
+								<p _ngcontent-uie-c13="">Leyenda</p>
+							</div>
+						: ""
+					}
+					<div className="overflow-y-auto scrolling-touch h-auto sm:h-full mt-5 sm:mb-3 rep">
+						<RouteInfo routes={routes}/>
+					</div>
+				</div>
+			</div>
+			{/*<aside className="bg-white w-64 min-h-screen flex flex-col">
 				<span className="text-blue py-2">EseBus</span>
 				<div className="border-r flex-grow">
 					<h2>Rutas:</h2>
 					<nav>
-						<ul className="list-disc">
-							{rutas.map((ruta, index) => (
+						<ul className="list-disc max-h-10 overflow-auto w-full">
+							<li><Checkbox label="Show All" handleCheck={handleAllCheck} value={checkAll}/></li>
+							{routes.map((ruta, index) => (
 								<li key={index}>
-									<Checkbox label={ruta.nombreRuta} />
+									<Checkbox label={ruta.nombreRuta} handleCheck={handleCheck} index={index} value={ruta.shown}/>
 								</li>
 							))}
 						</ul>
+						<RouteInfo routes={routes}/>
 					</nav>
 				</div>
-			</aside>
-			<main className="flex-grow flex flex-col min-h-screen">
-				<header className="bg-white border-b h-10 flex items-center justify-between">
-					<h1>Home</h1>
-				</header>
-				<Mapa />
+							</aside>*/}
+			<main className="w-full sm:w-auto sm:col-span-2 lg:col-span-3 h-screen animate__animated animate__fadeInRight animate__faster">
+				<Mapa routes={routes}/>
 			</main>
 		</div>
 	);
