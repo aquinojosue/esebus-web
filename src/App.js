@@ -45,7 +45,7 @@ export default function App() {
 	let timerId = null;
 	if(searchFilter){
 		timerId = setTimeout(async()=>{
-			const newFilteredRoutes = routes.filter(route=> route.nombreRuta.includes(searchFilter));
+			const newFilteredRoutes = routes.filter(route=> route.nombreRuta.toLowerCase().includes(searchFilter.toLowerCase()));
 			setFilteredRoutes(newFilteredRoutes);
 		})
 	}else {
