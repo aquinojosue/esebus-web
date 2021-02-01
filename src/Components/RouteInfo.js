@@ -8,7 +8,7 @@ function RouteInfo(props){
                     return(
                         (route.shown)?
                         <React.Fragment key={index}>
-                            <div class="h-auto w-full border border-gray-500 p-5 rounded-md mb-2">
+                            <div class="h-auto w-full border border-gray-500 p-5 mb-2 shadow-md">
                                 <div class="row-span-3"><h1 className="text-gray-700 font-bold text-lg">{route.nombreRuta}</h1></div>
                                 <div class="col-span-2">Ida <hr style={{"height":"5px", "background":route.colorIda}}/></div>
                                 <div class="row-span-2 col-span-2">Vuelta <hr style={{"height":"5px", "background":route.colorVuelta}}/></div>
