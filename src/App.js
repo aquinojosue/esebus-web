@@ -1,21 +1,32 @@
 import './styles.css';
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import Mapa from './Components/Mapa';
 import rutas from './Data/rutas.json';
 import Checkbox from './Components/Checkbox';
 import RouteInfo from './Components/RouteInfo'
 import esebusLogo from './Assets/eseBus_app_icon.svg'
 import esebusText from './Assets/eseBus_text.png'
+import SearchBar from './Components/SearchBar'
 
 export default function App() {
   const [routes, setRoutes] = useState([...rutas]);
+  const [filteredRoutes, setFilteredRoutes] = useState([...rutas]);
   const [checkAll, setCheckAll] = useState(false);
+  const [searchFilter, setFilter] = useState('');
   function handleCheck(index){
 	const newRoutes = [...routes];
-	const item = {...newRoutes[index]}
+	const newFilteredRoutes = [...filteredRoutes];
+	const item = {...newFilteredRoutes[index]}
+
+	const originalIndex = newRoutes.findIndex((element)=>(element.nombreRuta===item.nombreRuta))
 	item.shown = !item.shown;
-	newRoutes[index] = item;
-	setRoutes(newRoutes);
+	newFilteredRoutes[index] = item;
+	setFilteredRoutes(newFilteredRoutes);
+
+	if(originalIndex!=-1){
+		newRoutes[originalIndex] = item;
+		setRoutes(newRoutes);
+	}
   }
   function handleAllCheck(){
 	const newState = !checkAll;
@@ -26,6 +37,24 @@ export default function App() {
 	setRoutes(newRoutes)
 	setCheckAll(newState);
   }
+  function onSearch(searchValue){
+	  setFilter(searchValue);
+  }
+
+  useEffect(()=>{
+	let timerId = null;
+	if(searchFilter){
+		timerId = setTimeout(async()=>{
+			const newFilteredRoutes = routes.filter(route=> route.nombreRuta.includes(searchFilter));
+			setFilteredRoutes(newFilteredRoutes);
+		})
+	}else {
+		setFilteredRoutes([...routes]);	
+	}
+	return()=>{
+		clearTimeout(timerId);
+	}
+  },[searchFilter])
 	return (
 		<div className="flex flex-wrap px-3 sm:px-0 sm:grid sm:grid-cols-4">
 			<div className="w-full sm:w-auto sm:col-span-2 lg:col-span-1 h-auto sm:mx-8">
@@ -38,11 +67,16 @@ export default function App() {
 						<div className="h-auto w-full border border-esebus-dark mt-5 shadow-md">
 							<div className="mx-5 py-5">
 								<h3 className="text-esebus-dark font-bold">Seleccione una ruta</h3>
+								<div >
+									<SearchBar onSearch={onSearch} value={searchFilter}/>
+								</div>
 								<ul className="md:max-h-52 overflow-y-auto scrolling-touch">
-									<li className="pt-2">
-										<Checkbox  label="Show All" handleCheck={handleAllCheck} value={checkAll}/>
-									</li>
-									{routes.map((ruta, index) => (
+									{(!searchFilter)?
+										<li className="pt-5">
+											<Checkbox  label="Show All" handleCheck={handleAllCheck} value={checkAll}/>
+										</li>
+									:""}
+									{filteredRoutes.map((ruta, index) => (
 										<div className="pt-2">
 										<li key={index}>
 											<Checkbox label={ruta.nombreRuta} handleCheck={handleCheck} index={index} value={ruta.shown}/>
