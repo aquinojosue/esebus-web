@@ -28,17 +28,17 @@ export default function App() {
   }
 	return (
 		<div className="flex flex-wrap px-3 sm:px-0 sm:grid sm:grid-cols-4">
-			<div className="w-full sm:w-auto sm:col-span-2 lg:col-span-1 h-auto sm:mx-5">
+			<div className="w-full sm:w-auto sm:col-span-2 lg:col-span-1 h-auto sm:mx-8">
 				<div className="flex flex-col h-auto sm:h-screen">
 					<div classname="pt-3">
-						<div className="flex flex-wrap">
+						<div className="flex flex-wrap pt-3 items-stretch">
 							<img _ngcontent-uie-c13="" src={esebusLogo} class="h-10 mr-3 shadow-lg rounded-full mt-2"/>
-							<img _ngcontent-uie-c13="" src={esebusText} class="h-7 mt-3"/>
+							<img _ngcontent-uie-c13="" src={esebusText} class="h-7 mt-3 object-center"/>
 						</div>
-						<div className="h-auto w-full border border-esebus-dark mt-5">
+						<div className="h-auto w-full border border-esebus-dark mt-5 shadow-md">
 							<div className="mx-5 py-5">
 								<h3 className="text-esebus-dark font-bold">Seleccione una ruta</h3>
-								<ul>
+								<ul className="md:max-h-52 overflow-y-auto scrolling-touch">
 									<li className="pt-2">
 										<Checkbox  label="Show All" handleCheck={handleAllCheck} value={checkAll}/>
 									</li>
