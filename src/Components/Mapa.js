@@ -17,6 +17,7 @@ export default function Mapa(props) {
   });
 
   const newLocation = useGeolocation();
+  
   function localizar() {
     if (newLocation.loaded && !newLocation.error) {
       setLocation({
@@ -27,9 +28,8 @@ export default function Mapa(props) {
       alert(newLocation.error.message);
     }
   }
-  const zoom = 14;
-  const center = [13.735461, -89.08062];
-  const color = rutas[0].colorVuelta;
+  const zoom = 13;
+  const center = [13.705953500345197, -89.21219012823919];
 
   return (
     <>
