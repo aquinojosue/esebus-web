@@ -33,7 +33,7 @@ export default function App() {
 					<div classname="pt-3">
 						<div className="flex flex-wrap pt-3 items-stretch">
 							<img _ngcontent-uie-c13="" src={esebusLogo} class="h-10 mr-3 shadow-lg rounded-full mt-2"/>
-							<img _ngcontent-uie-c13="" src={esebusText} class="h-7 mt-3 object-center"/>
+							<img _ngcontent-uie-c13="" src={esebusText} class="h-7 mt-3 object-center"/> <span className="pt-2 text-gray-400"><sup>beta</sup></span>
 						</div>
 						<div className="h-auto w-full border border-esebus-dark mt-5 shadow-md">
 							<div className="mx-5 py-5">
