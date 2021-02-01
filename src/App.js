@@ -57,7 +57,7 @@ export default function App() {
   },[searchFilter])
 	return (
 		<div className="flex flex-wrap px-3 sm:px-0 sm:grid sm:grid-cols-4">
-			<div className="w-full sm:w-auto sm:col-span-2 lg:col-span-1 h-auto sm:mx-8">
+			<div className="w-full sm:w-auto sm:col-span-2 lg:col-span-1 h-auto sm:mx-8 ">
 				<div className="flex flex-col h-auto sm:h-screen">
 					<div classname="pt-3">
 						<div className="flex flex-wrap pt-3 items-stretch">
@@ -98,25 +98,9 @@ export default function App() {
 						<RouteInfo routes={routes}/>
 					</div>
 				</div>
+			
 			</div>
-			{/*<aside className="bg-white w-64 min-h-screen flex flex-col">
-				<span className="text-blue py-2">EseBus</span>
-				<div className="border-r flex-grow">
-					<h2>Rutas:</h2>
-					<nav>
-						<ul className="list-disc max-h-10 overflow-auto w-full">
-							<li><Checkbox label="Show All" handleCheck={handleAllCheck} value={checkAll}/></li>
-							{routes.map((ruta, index) => (
-								<li key={index}>
-									<Checkbox label={ruta.nombreRuta} handleCheck={handleCheck} index={index} value={ruta.shown}/>
-								</li>
-							))}
-						</ul>
-						<RouteInfo routes={routes}/>
-					</nav>
-				</div>
-							</aside>*/}
-			<main className="w-full sm:w-auto sm:col-span-2 lg:col-span-3 h-screen animate__animated animate__fadeInRight animate__faster">
+			<main className="w-full sm:w-auto sm:col-span-2 lg:col-span-3 h-screen ">
 				<Mapa routes={routes}/>
 			</main>
 		</div>
