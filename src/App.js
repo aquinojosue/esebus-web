@@ -4,6 +4,8 @@ import Mapa from './Components/Mapa';
 import rutas from './Data/rutas.json';
 import Checkbox from './Components/Checkbox';
 import RouteInfo from './Components/RouteInfo'
+import esebusLogo from './Assets/eseBus_app_icon.svg'
+import esebusText from './Assets/eseBus_text.png'
 
 export default function App() {
   const [routes, setRoutes] = useState([...rutas]);
@@ -29,12 +31,13 @@ export default function App() {
 			<div className="w-full sm:w-auto sm:col-span-2 lg:col-span-1 h-auto sm:mx-5">
 				<div className="flex flex-col h-auto sm:h-screen">
 					<div classname="pt-3">
-						<div className="flex flex-wrap cursor-pointer">
-							Aqui ira el logo xd
+						<div className="flex flex-wrap">
+							<img _ngcontent-uie-c13="" src={esebusLogo} class="h-10 mr-3 shadow-lg rounded-full mt-2"/>
+							<img _ngcontent-uie-c13="" src={esebusText} class="h-7 mt-3"/>
 						</div>
-						<div className="h-auto w-full border border-green-500 mt-5">
+						<div className="h-auto w-full border border-esebus-dark mt-5">
 							<div className="mx-5 py-5">
-								<h3 className="text-green-600 font-bold">Seleccione una ruta</h3>
+								<h3 className="text-esebus-dark font-bold">Seleccione una ruta</h3>
 								<ul>
 									<li className="pt-2">
 										<Checkbox  label="Show All" handleCheck={handleAllCheck} value={checkAll}/>
