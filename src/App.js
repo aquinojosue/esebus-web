@@ -98,7 +98,6 @@ export default function App() {
 						<RouteInfo routes={routes}/>
 					</div>
 				</div>
-			
 			</div>
 			<main className="w-full sm:w-auto sm:col-span-2 lg:col-span-3 h-screen ">
 				<Mapa routes={routes}/>
