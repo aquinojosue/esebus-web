@@ -1,7 +1,6 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import useGeolocation from "../Hooks/useGeolocation";
-import rutas from "../Data/rutas.json";
-import RouteInfo from "./RouteInfo";
+//import RouteInfo from "./RouteInfo";
 
 import {
   MapContainer,
