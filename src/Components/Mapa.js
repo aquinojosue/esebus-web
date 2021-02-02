@@ -36,7 +36,7 @@ export default function Mapa(props) {
       <MapContainer center={center} zoom={zoom} zoomControl={false}>
         <TileLayer
           attribution="&copy; Elesteam"
-          url="http://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png"
+          url="http://{s}.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png"
         />
         {
           props.routes.map((ruta, index)=>{
