@@ -5,11 +5,16 @@ module.exports = {
     extend: {
       colors: {
         'esebus-dark': '#005A80',
-      }
+      },
+      debugScreens: {
+        position: ['top', 'left'],
+      },
     }
   },
   variants: {
     extend: {}
   },
-  plugins: []
+  plugins: [
+    require('tailwindcss-debug-screens'),
+  ]
 };

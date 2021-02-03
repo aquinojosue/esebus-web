@@ -6,7 +6,7 @@ import "./index.css";
 const rootElement = document.getElementById("root");
 ReactDOM.render(
   <StrictMode>
-    <App />
+    <App className="debug-screens"/>
   </StrictMode>,
   rootElement
 );
