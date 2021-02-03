@@ -7,6 +7,7 @@ import RouteInfo from './Components/RouteInfo'
 import esebusLogo from './Assets/eseBus_app_icon.svg'
 import esebusText from './Assets/eseBus_text.png'
 import SearchBar from './Components/SearchBar'
+//import { CSSTransitionGroup } from 'react-transition-group';
 
 export default function App() {
   const [routes, setRoutes] = useState([...rutas]);
@@ -61,13 +62,13 @@ export default function App() {
 				<div className="flex flex-col h-auto sm:h-screen">
 					<div classname="pt-3">
 						<div className="flex flex-wrap pt-3 items-stretch">
-							<img _ngcontent-uie-c13="" src={esebusLogo} class="h-10 mr-3 shadow-lg rounded-full mt-2"/>
-							<img _ngcontent-uie-c13="" src={esebusText} class="h-7 mt-3 object-center"/> <span className="pt-2 text-gray-400"><sup>beta</sup></span>
+							<img src={esebusLogo} class="h-10 mr-3 shadow-lg rounded-full mt-2"/>
+							<img src={esebusText} class="h-7 mt-3 object-center"/> <span className="pt-2 text-gray-400"><sup>beta</sup></span>
 						</div>
 						<div className="h-auto w-full border border-esebus-dark mt-5 shadow-md">
 							<div className="mx-5 py-5">
 								<h3 className="text-esebus-dark font-bold">Seleccione una ruta</h3>
-								<div >
+								<div>
 									<SearchBar onSearch={onSearch} value={searchFilter}/>
 								</div>
 								<ul className="md:max-h-52 overflow-y-auto scrolling-touch">
@@ -87,20 +88,20 @@ export default function App() {
 							</div>
 						</div>
 					</div>
-					{
-						(routes.some(r=>r.shown)) ? 
-							<div className="flex mt-5 text-gray-600">
-								<p _ngcontent-uie-c13="">Leyenda</p>
-							</div>
-						: ""
-					}
+						{
+							(routes.some(r=>r.shown)) ? 
+								<div className="flex mt-5 text-gray-600">
+									<p _ngcontent-uie-c13="">Leyenda</p>
+								</div>
+							: ""
+						}
 					<div className="overflow-y-auto scrolling-touch h-auto sm:h-full mt-5 sm:mb-3 rep">
-						<RouteInfo routes={routes}/>
+						<RouteInfo routes={routes.filter(route=>route.shown)}/>
 					</div>
 				</div>
 			</div>
-			<main className="w-full sm:w-auto sm:col-span-2 lg:col-span-3 h-screen ">
-				<Mapa routes={routes}/>
+			<main className="w-full sm:w-auto sm:col-span-2 lg:col-span-3 h-screen">
+				<Mapa routes={routes.filter(route=>route.shown)}/>
 			</main>
 		</div>
 	);

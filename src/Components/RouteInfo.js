@@ -8,7 +8,7 @@ function RouteInfo(props){
         <div className="leaflet-control overflow-y-auto scrolling-touch w-full">
             <TransitionGroup>
             {
-                props.routes.filter(route => route.shown).map((route, index)=>{
+                props.routes.map((route, index)=>{
                     return(
                         <CSSTransition timeout={(index + 1)*200} classNames="item">
                                 <div class="h-auto w-full border border-gray-500 p-5 mb-2 shadow-md" key={index}>
