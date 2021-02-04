@@ -7,6 +7,7 @@ import RouteInfo from './Components/RouteInfo'
 import esebusLogo from './Assets/eseBus_app_icon.svg'
 import esebusText from './Assets/eseBus_text.png'
 import SearchBar from './Components/SearchBar'
+import Sidebar from './Components/Sidebar';
 import {
 	BrowserView,
 	MobileView,
@@ -62,8 +63,26 @@ export default function App() {
 		clearTimeout(timerId);
 	}
   },[searchFilter])
+  
+  const sidebarParams = {
+	  pageWrapId: "page-wrap",
+	  outerContainerId: "App",
+	  customBurgerIcon: <img src={esebusLogo}/>,
+	  onSearch: onSearch,
+	  searchFilter: searchFilter,
+	  handleAllCheck: handleAllCheck,
+	  checkAll: checkAll,
+	  filteredRoutes: filteredRoutes,
+	  handleCheck: handleCheck,
+	  routes: routes,
+
+  }
 	return (
-		<div className="flex flex-wrap px-3 sm:px-0 sm:grid sm:grid-cols-4 debug-screens">
+		<div className="flex flex-wrap" id="App">
+		<Sidebar {...sidebarParams}/>
+		{
+			/*
+			<div className="flex flex-wrap px-3 sm:px-0 sm:grid sm:grid-cols-4 debug-screens">
 			<BrowserView>
 				<div className="w-full sm:w-auto sm:col-span-2 lg:col-span-1 h-auto sm:mx-8">
 					<div className="flex flex-col h-auto sm:h-screen">
@@ -108,10 +127,14 @@ export default function App() {
 					</div>
 				</div>
 			</BrowserView>
-			<main className="w-full sm:w-auto sm:col-span-2 lg:col-span-3 h-screen">
+			<main className="w-full sm:w-auto sm:col-span-2 lg:col-span-3 h-screen">*/
+		}
+			<main id="page-wrap" className="flex-grow w-screen h-full absolute">
 				<Mapa routes={routes.filter(route=>route.shown)}/>
 			</main>
+			<div class="bg-blue-500">footer</div>
 		</div>
+
 		
 	);
 }

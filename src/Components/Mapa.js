@@ -66,7 +66,7 @@ export default function Mapa(props) {
           }}
         </MapConsumer>
 
-        <ZoomControl className="leaflet-control" position="bottomleft" />
+        <ZoomControl className="leaflet-control" position="topright" />
         {
           <div className="leaflet-bottom leaflet-right">
             {/*
