@@ -40,6 +40,7 @@ export default function Mapa(props) {
         {
           props.routes.map((ruta, index)=>{
             return(
+            (ruta.shown)?
               <div key={index}>
                 <Polyline
                   color={ruta.colorVuelta}
@@ -53,7 +54,7 @@ export default function Mapa(props) {
                     ruta.rutaIda.map((direccion) => [direccion[1], direccion[0]])
                   ]}
                 />
-              </div>
+              </div>:""
             )
           })
         }
