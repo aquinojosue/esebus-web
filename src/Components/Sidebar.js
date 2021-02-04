@@ -12,7 +12,7 @@ import esebusText from '../Assets/eseBus_text.png'
 import SearchBar from './SearchBar'
 function Sidebar(props){
     return(
-        <Menu {...props} isOpen={isBrowser}>
+        <Menu {...props}>
 				<div className="bm-item-list">
 					<div className="flex flex-col max-h-3/4">
 						<div>
