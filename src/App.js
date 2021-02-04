@@ -2,19 +2,11 @@ import './styles.css';
 import React, {useState, useEffect} from 'react';
 import Mapa from './Components/Mapa';
 import rutas from './Data/rutas.json';
-import Checkbox from './Components/Checkbox';
-import RouteInfo from './Components/RouteInfo'
+//import RouteInfo from './Components/RouteInfo'
 import esebusLogo from './Assets/eseBus_app_icon.svg'
-import esebusText from './Assets/eseBus_text.png'
-import SearchBar from './Components/SearchBar'
-
-import {slide as Menu} from 'react-burger-menu';
 import Sidebar from './Components/Sidebar';
 import {
-	BrowserView,
-	MobileView,
-	isBrowser,
-	isMobile
+	isBrowser
   } from "react-device-detect";
 //import { CSSTransitionGroup } from 'react-transition-group';
 

@@ -121,9 +121,6 @@ input:checked + svg {
 .bm-item:focus {
   outline: none;
 }
-/* Wrapper for item list */
-.bm-item-list {
-}
 
 /* Styling of overlay */
 .bm-overlay {

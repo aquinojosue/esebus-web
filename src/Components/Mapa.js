@@ -1,7 +1,5 @@
 import React, { useState } from "react";
 import useGeolocation from "../Hooks/useGeolocation";
-//import RouteInfo from "./RouteInfo";
-
 import {
   MapContainer,
   MapConsumer,
@@ -9,6 +7,7 @@ import {
   TileLayer,
   ZoomControl
 } from "react-leaflet";
+
 export default function Mapa(props) {
   const [location, setLocation] = useState({
     default: true,
@@ -39,22 +38,24 @@ export default function Mapa(props) {
         />
         {
           props.routes.map((ruta, index)=>{
+            {/** For some reason this breaks if I send a filtered list. */}
             return(
-            (ruta.shown)?
-              <div key={index}>
-                <Polyline
-                  color={ruta.colorVuelta}
-                  positions={[
-                  ruta.rutaVuelta.map((direccion) => [direccion[1], direccion[0]])
-                ]}
-                />
-                <Polyline
-                  color={ruta.colorIda}
-                  positions={[
-                    ruta.rutaIda.map((direccion) => [direccion[1], direccion[0]])
-                  ]}
-                />
-              </div>:""
+                (ruta.shown)?
+                    <div key={index}>
+                        <Polyline
+                        color={ruta.colorVuelta}
+                        positions={[
+                        ruta.rutaVuelta.map((direccion) => [direccion[1], direccion[0]])
+                        ]}
+                        />
+                        <Polyline
+                        color={ruta.colorIda}
+                        positions={[
+                            ruta.rutaIda.map((direccion) => [direccion[1], direccion[0]])
+                        ]}
+                        />
+                    </div>
+                :""
             )
           })
         }
@@ -62,7 +63,6 @@ export default function Mapa(props) {
           {(map) => {
             if (!location.default)
               map.flyTo(location.location, 17, { animate: true });
-            console.log("map center: ", map.getCenter());
             return null;
           }}
         </MapConsumer>
