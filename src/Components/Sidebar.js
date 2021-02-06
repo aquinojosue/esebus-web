@@ -20,7 +20,7 @@ function Sidebar(props){
 							</div>
 							<div className="w-full border border-esebus-dark mt-5 shadow-md">
 								<div className="mx-5 py-4">
-									<h3 className="text-esebus-dark font-bold">Seleccione una ruta</h3>
+									<h3 className="text-esebus-dark font-bold">Seleccione una ruta (total: {props.routes.length}) </h3>
 									<div>
 										<SearchBar onSearch={props.onSearch} value={props.searchFilter}/>
 									</div>
