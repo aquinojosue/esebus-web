@@ -9,6 +9,9 @@ module.exports = {
       debugScreens: {
         position: ['top', 'left'],
       },
+        fontFamily: {
+            'sans': ['Nunito Sans','ui-sans-serif', 'system-ui']
+        },
     }
   },
   variants: {
