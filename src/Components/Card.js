@@ -1,7 +1,6 @@
 import React from 'react';
 import RouteInfo from './RouteInfo'
 import {CSSTransition} from 'react-transition-group';
-
 function Card(props) {
     return (
             <CSSTransition
@@ -10,10 +9,10 @@ function Card(props) {
                 classNames="item"
                 unmountOnExit
             >
-                <div className="absolute hidden xl:block max-w-md bottom-5 right-5 z-10">
-                    <div className=" bg-white rounded-xl p-4 flex flex-col h-32 w-72 shadow-2xl">
-                        <div className="mb-8 ml-5">
-                            <div className=" overflow-auto h-24 ">
+                <div className="absolute hidden xl:block max-w-md bottom-5 right-5 z-10 content-center">
+                    <div className=" bg-white rounded-xl pt-3 pl-3 flex flex-col h-24 w-60 shadow-2xl">
+                        <div className="mb-8">
+                            <div className=" overflow-auto h-20 overflow-y-scroll">
                                 {/**
                                 <div className="text-esebus-dark font-bold text-xl mb-2">
                                     Leyenda
