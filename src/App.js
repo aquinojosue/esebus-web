@@ -1,14 +1,12 @@
 import './styles.css';
-import React, {useState, useEffect} from 'react';
+import React, { useState, useEffect } from 'react';
 import Mapa from './Components/Mapa';
 import rutas from './Data/rutas.json';
-//import RouteInfo from './Components/RouteInfo'
+import RouteInfo from './Components/RouteInfo'
 import esebusLogo from './Assets/eseBus_app_icon.svg'
 import Sidebar from './Components/Sidebar';
-import {
-	isBrowser
-  } from "react-device-detect";
-//import { CSSTransitionGroup } from 'react-transition-group';
+import { isBrowser } from "react-device-detect";
+import Card from './Components/Card';
 
 export default function App() {
   const [routes, setRoutes] = useState([...rutas]);
@@ -72,11 +70,23 @@ export default function App() {
       isOpen: isBrowser
   }
 	return (
-		<div className="flex flex-wrap" id="App">
-		<Sidebar {...sidebarParams}/>
-			<main id="page-wrap" className="flex-grow w-screen h-full absolute z-1">
-				<Mapa routes={routes}/>
-			</main>
-		</div>
+            <div class="flex flex-col h-screen" id="page-wrap">
+                <Sidebar {...sidebarParams} />
+                {/**<div className="hidden xl:block absolute bottom-5 right-5 overflow-auto h-40 z-10">
+                    <RouteInfo routes={routes.filter(route=>route.shown)}/>
+                </div> */}
+                <Card className="" routes={routes.filter(r=>r.shown)}/>
+                <main class="flex-1 overflow-y-auto" id="page-wrap">
+                    <Mapa routes={routes}/>
+                </main>
+                {
+                    routes.some(r=>r.shown)?
+                        <footer class="xl:hidden py-10 bg-gray-700 text-center text-white">
+                            <div className="overflow-auto h-28 px-5">
+                                <RouteInfo routes={routes.filter(route=>route.shown)}/>
+                            </div>
+                        </footer>:""
+                }
+    </div>
 	);
 }

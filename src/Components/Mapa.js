@@ -29,14 +29,14 @@ export default function Mapa(props) {
   }
   const zoom = 13;
   const center = [13.705953500345197, -89.21219012823919];
-  const nuevaUrl = "https://{s}.tile.jawg.io/jawg-sunny/{z}/{x}/{y}{r}.png?access-token=Muf2AN1SITcFSCIK02FatUPPAWIXScDl56L1ADaLMGOLeXvJ6tDFYPpSLC7Qwlds";
+  const newUrl = "https://{s}.tile.jawg.io/jawg-sunny/{z}/{x}/{y}{r}.png?access-token=Muf2AN1SITcFSCIK02FatUPPAWIXScDl56L1ADaLMGOLeXvJ6tDFYPpSLC7Qwlds";
   const oldUrl = "http://{s}.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png"
   return (
     <>
       <MapContainer center={center} zoom={zoom} zoomControl={false}>
         <TileLayer
           attribution="&copy; Elesteam"
-          url={nuevaUrl}
+          url={newUrl}
         />
         {
           props.routes.map((ruta, index)=>{
@@ -47,20 +47,27 @@ export default function Mapa(props) {
                         <Polyline
                         color={ruta.colorVuelta}
                         positions={[
-                        ruta.rutaVuelta.map((direccion) => [direccion[1], direccion[0]])
+                            ruta.rutaVuelta.map((direccion) => [direccion[1], direccion[0]])
                         ]}
+                        weight="5"
+                        smoothFactor="7"
                         />
                         <Polyline
                         color={ruta.colorIda}
                         positions={[
                             ruta.rutaIda.map((direccion) => [direccion[1], direccion[0]])
                         ]}
+                        smoothFactor="7"
+                        weight="5"
                         />
                     </div>
                 :""
             )
           })
         }
+        {
+            /**
+             * this would be only if we need to go to gps location
         <MapConsumer>
           {(map) => {
             if (!location.default)
@@ -68,26 +75,10 @@ export default function Mapa(props) {
             return null;
           }}
         </MapConsumer>
+             */
+        }
 
         <ZoomControl className="leaflet-control" position="topright" />
-        {/*
-          <div className="leaflet-bottom leaflet-right">
-              {
-                  (props.routes.some(r=>r.shown)) ?
-                  <div className="w-screen z-20 h-52 bg-white leaflet-control shadow-2xl m-5 mb-5 border-esebus-dark">
-                  <RouteInfo routes={props.routes.filter(route=>route.shown)}/>
-              </div>
-              :""
-              }
-              
-            {
-            <RouteInfo routes={props.routes} className="leaflet-control"/>
-              <button className="leaflet-control" onClick={localizar}>
-              Algo
-            </button>
-            }
-          </div>
-        */}
       </MapContainer>
     </>
   );
