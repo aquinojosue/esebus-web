@@ -74,9 +74,6 @@ export default function App() {
 	return (
         <div class="flex flex-col h-screen" id="page-wrap">
             <Sidebar {...sidebarParams} />
-            {/**<div className="hidden xl:block absolute bottom-5 right-5 overflow-auto h-40 z-10">
-                <RouteInfo routes={routes.filter(route=>route.shown)}/>
-            </div> */}
             <Card routes={routes.filter(r=>r.shown)}/>
             <main class="flex-1 overflow-y-auto" id="page-wrap">
                 <Mapa routes={routes}/>
