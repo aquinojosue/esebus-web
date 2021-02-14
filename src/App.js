@@ -75,7 +75,7 @@ export default function App() {
         <div class="flex flex-col h-screen" id="page-wrap">
             <Sidebar {...sidebarParams} />
             <Card routes={routes.filter(r=>r.shown)}/>
-            <main class="flex-1 overflow-y-auto" id="page-wrap">
+            <main class="flex-1" id="page-wrap">
                 <Mapa routes={routes}/>
             </main>
             <FooterLegend routes={routes.filter(r=>r.shown)}/>

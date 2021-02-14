@@ -19,7 +19,7 @@ function Sidebar(props){
 							</div>
 							<div className="flex flex-grow w-full mt-3">
 								<div className="h-96 mx-5 py-4">
-									<h3 className="text-esebus-dark font-bold">Seleccione una ruta</h3>
+									<h3 className="text-esebus-dark font-bold">Seleccione una ruta </h3>
 									<div>
 										<SearchBar onSearch={props.onSearch} value={props.searchFilter}/>
 									</div>
