@@ -72,10 +72,11 @@ export default function App() {
       isOpen: isBrowser
   }
 	return (
-        <div class="flex flex-col h-screen" id="page-wrap">
+        <div class="flex flex-col"
+        style={{height: window.innerHeight}}>
             <Sidebar {...sidebarParams} />
             <Card routes={routes.filter(r=>r.shown)}/>
-            <main class="flex-1" id="page-wrap">
+            <main class="flex-grow" id="page-wrap">
                 <Mapa routes={routes}/>
             </main>
             <FooterLegend routes={routes.filter(r=>r.shown)}/>
