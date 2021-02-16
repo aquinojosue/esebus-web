@@ -8,7 +8,7 @@ import Sidebar from './Components/Sidebar';
 import { isBrowser } from "react-device-detect";
 import Card from './Components/Card';
 import FooterLegend from './Components/FooterLegend';
-
+import useWindowDimensions from './Hooks/useWindowDimensions';
 
 export default function App() {
   const [routes, setRoutes] = useState([...rutas]);
@@ -71,12 +71,12 @@ export default function App() {
       routes: routes,
       isOpen: isBrowser
   }
+  const { height, width } = useWindowDimensions();
 	return (
-        <div class="flex flex-col"
-        style={{height: window.innerHeight}}>
+        <div class="flex flex-col" style={{height: height}}>
             <Sidebar {...sidebarParams} />
             <Card routes={routes.filter(r=>r.shown)}/>
-            <main class="flex-grow" id="page-wrap">
+            <main class="flex-grow h-full" id="page-wrap">
                 <Mapa routes={routes}/>
             </main>
             <FooterLegend routes={routes.filter(r=>r.shown)}/>
