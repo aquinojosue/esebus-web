@@ -57,6 +57,13 @@ export default function App() {
 		clearTimeout(timerId);
 	}
   },[searchFilter])
+
+  useEffect(()=>{
+      for(var i=0;i<3;i++){
+          var random = Math.floor(Math.random()*(routes.length-1));
+          routes[random].shown = true;
+      }
+  },[])
   
   const sidebarParams = {
 	  pageWrapId: "page-wrap",
@@ -69,7 +76,7 @@ export default function App() {
 	  filteredRoutes: filteredRoutes,
 	  handleCheck: handleCheck,
       routes: routes,
-      isOpen: isBrowser
+      isOpen: true
   }
   const { height, width } = useWindowDimensions();
 	return (

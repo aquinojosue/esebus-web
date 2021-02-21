@@ -5,7 +5,8 @@ import {
   MapConsumer,
   Polyline,
   TileLayer,
-  ZoomControl
+  ZoomControl,
+  Popup
 } from "react-leaflet";
 import RouteInfo from './RouteInfo'
 
@@ -51,7 +52,11 @@ export default function Mapa(props) {
                         ]}
                         weight="5"
                         smoothFactor="7"
-                        />
+                        >
+                            <Popup>
+                                <strong>{ruta.nombreRuta}</strong> Ida
+                            </Popup>
+                        </Polyline>
                         <Polyline
                         color={ruta.colorIda}
                         positions={[
@@ -59,7 +64,11 @@ export default function Mapa(props) {
                         ]}
                         smoothFactor="7"
                         weight="5"
-                        />
+                        >
+                            <Popup>
+                                <strong>{ruta.nombreRuta}</strong> Vuelta
+                            </Popup>
+                        </Polyline>
                     </div>
                 :""
             )
