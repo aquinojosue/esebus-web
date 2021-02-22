@@ -2,10 +2,8 @@ import './styles.css';
 import React, { useState, useEffect } from 'react';
 import Mapa from './Components/Mapa';
 import rutas from './Data/rutas.json';
-import RouteInfo from './Components/RouteInfo'
 import esebusLogo from './Assets/eseBus_app_icon.svg'
 import Sidebar from './Components/Sidebar';
-import { isBrowser } from "react-device-detect";
 import Card from './Components/Card';
 import FooterLegend from './Components/FooterLegend';
 import useWindowDimensions from './Hooks/useWindowDimensions';
@@ -40,7 +38,7 @@ export default function App() {
 	setCheckAll(newState);
   }
   function onSearch(searchValue){
-	  setFilter(searchValue);
+	setFilter(searchValue);
   }
 
   useEffect(()=>{
@@ -60,23 +58,23 @@ export default function App() {
 
   useEffect(()=>{
       for(var i=0;i<3;i++){
-          var random = Math.floor(Math.random()*(routes.length-1));
-          routes[random].shown = true;
+		var random = Math.floor(Math.random()*(routes.length-1));
+		routes[random].shown = true;
       }
   },[])
   
   const sidebarParams = {
-	  pageWrapId: "page-wrap",
-	  outerContainerId: "App",
-	  customBurgerIcon: <img src={esebusLogo}/>,
-	  onSearch: onSearch,
-	  searchFilter: searchFilter,
-	  handleAllCheck: handleAllCheck,
-	  checkAll: checkAll,
-	  filteredRoutes: filteredRoutes,
-	  handleCheck: handleCheck,
-      routes: routes,
-      isOpen: true
+	pageWrapId: "page-wrap",
+	outerContainerId: "App",
+	customBurgerIcon: <img src={esebusLogo}/>,
+	onSearch: onSearch,
+	searchFilter: searchFilter,
+	handleAllCheck: handleAllCheck,
+	checkAll: checkAll,
+	filteredRoutes: filteredRoutes,
+	handleCheck: handleCheck,
+	routes: routes,
+	isOpen: true
   }
   const { height, width } = useWindowDimensions();
 	return (
