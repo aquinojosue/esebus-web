@@ -13,14 +13,15 @@ export default function App() {
   const [filteredRoutes, setFilteredRoutes] = useState([...rutas]);
   const [checkAll, setCheckAll] = useState(false);
   const [searchFilter, setFilter] = useState('');
-  function handleCheck(index){
+  function handleCheck(index, parentElement){
 	const newRoutes = [...routes];
 	const newFilteredRoutes = [...filteredRoutes];
-	const item = {...newFilteredRoutes[index]}
+	const item = {...parentElement[index]}
 
 	const originalIndex = newRoutes.findIndex((element)=>(element.nombreRuta===item.nombreRuta))
+	const filteredIndex = newFilteredRoutes.findIndex((element)=>(element.nombreRuta===item.nombreRuta))
 	item.shown = !item.shown;
-	newFilteredRoutes[index] = item;
+	newFilteredRoutes[filteredIndex] = item;
 	setFilteredRoutes(newFilteredRoutes);
 
 	if(originalIndex!=-1){

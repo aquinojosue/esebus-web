@@ -2,7 +2,7 @@ import React, {useState} from 'react';
 
 function Checkbox(props){
    function toggleChecked(){
-        props.handleCheck(props.index);
+        props.handleCheck(props.index, props.parentElement);
     }
     return(
         <label className="flex justify-start items-start">

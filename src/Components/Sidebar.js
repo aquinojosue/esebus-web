@@ -42,10 +42,10 @@ function Sidebar(props){
                         {props.filteredRoutes.map(a => a.departamento).filter(onlyUnique).map((depto, deptoIndex) => (
                             <div key={deptoIndex}>
                                 <span>{depto}</span>
-                                { props.filteredRoutes.filter(r=>r.departamento === depto).map((ruta, index)=>
+                                {props.filteredRoutes.filter(r=>r.departamento === depto).map((ruta, index,self)=>
                                     <div className="pt-2">
                                         <li key={index}>
-                                        <Checkbox label={ruta.nombreRuta} handleCheck={props.handleCheck} index={index} value={ruta.shown}/>
+                                        <Checkbox label={ruta.nombreRuta} handleCheck={props.handleCheck} parentElement={self} index={index} value={ruta.shown}/>
                                         </li>
                                     </div>
                                 )}
