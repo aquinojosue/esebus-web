@@ -77,7 +77,7 @@ export default function App() {
 	routes: routes,
 	isOpen: true
   }
-  const { height, width } = useWindowDimensions();
+  const { height } = useWindowDimensions();
 	return (
         <div class="flex flex-col" style={{height: height}}>
             <Sidebar {...sidebarParams} />

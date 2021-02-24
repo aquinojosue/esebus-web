@@ -1,8 +1,6 @@
 import React,{useEffect, useRef} from 'react';
 import {slide as Menu} from 'react-burger-menu';
-import { MobileOnlyView } from 'react-device-detect';
 import Checkbox from './Checkbox';
-import RouteInfo from './RouteInfo'
 import esebusLogo from '../Assets/eseBus_app_icon.svg'
 import esebusText from '../Assets/eseBus_text.png'
 import SearchBar from './SearchBar'
