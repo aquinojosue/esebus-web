@@ -5,12 +5,9 @@ function Checkbox(props){
         props.handleCheck(props.index, props.parentElement);
     }
     return(
-        <label className="flex justify-start items-start">
-            <div className="bg-white border-2 rounded border-gray-400 w-6 h-6 flex flex-shrink-0 justify-center items-center mr-2 focus-within:border-blue-500">
-                <input type="checkbox" className="opacity-0 absolute" checked={props.value} onClick={toggleChecked}/>
-                <svg className="fill-current hidden w-4 h-4 text-green-500 pointer-events-none" viewBox="0 0 20 20"><path d="M0 11l2-2 5 5L18 3l2 2L7 18z"/></svg>
-            </div>
-            <div className="select-none">{props.label}</div>
+        <label className="inline-flex items-center">
+            <input type="checkbox" onClick={toggleChecked} className="form-checkbox h-5 w-5 text-indigo-600" checked={props.value}/>
+            <span className="ml-2 text-gray-700">{props.label}</span>
         </label>
     )
 }
