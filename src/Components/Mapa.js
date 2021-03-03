@@ -1,8 +1,7 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import useGeolocation from "../Hooks/useGeolocation";
 import {
   MapContainer,
-  MapConsumer,
   Polyline,
   TileLayer,
   ZoomControl,
@@ -34,14 +33,14 @@ export default function Mapa(props) {
   const oldUrl = "http://{s}.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png"
   return (
     <>
-      <MapContainer center={center} zoom={zoom} zoomControl={false}>
+      <MapContainer  center={center} zoom={zoom} zoomControl={false}>
         <TileLayer
           attribution="&copy; Elesteam"
           url={newUrl}
         />
-        {
+        {props.routes ?
           props.routes.map((ruta, index)=>{
-            {/** For some reason this breaks if I send a filtered list. */}
+           /* For some reason this breaks if I send a filtered list. */
             return(
                 (ruta.shown)?
                     <div key={index}>
@@ -73,7 +72,7 @@ export default function Mapa(props) {
                 :""
             )
           })
-        }
+        :""}
         {
             /**
              * this would be only if we need to go to gps location

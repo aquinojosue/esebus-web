@@ -1,18 +1,22 @@
-import React,{useEffect, useRef} from 'react';
+import React,{useEffect, useRef, useState} from 'react';
 import {slide as Menu} from 'react-burger-menu';
 import Checkbox from './Checkbox';
 import esebusLogo from '../Assets/eseBus_app_icon.svg'
 import esebusText from '../Assets/eseBus_text.png'
 import SearchBar from './SearchBar'
+import axios from 'axios'
 
 function Sidebar(props){
     function onlyUnique(value, index, self){
         return self.indexOf(value) === index;
     }
-    const myRef = useRef(null)
-    useEffect(() => {
-        window.scrollTo(0, 0)
-    }, [])
+
+    function nameFilter(route){
+        return (props.searchFilter)?
+            route.nombreRuta.toLowerCase().includes(props.searchFilter.toLowerCase()):
+            true;
+    }
+    
     return(
         <Menu {...props}>
             <div className="static">
@@ -32,12 +36,20 @@ function Sidebar(props){
                 <div className="mx-5 pt-28 pb-8">
                     <ul className="h-full flex-grow overflow-y-auto scrolling-touch">
                         {(!props.searchFilter)?
-                            <li className="pt-5" ref={myRef}>
+                            <li className="pt-5">
                                 <Checkbox label="Show All" handleCheck={props.handleAllCheck} value={props.checkAll}/>
                             </li>
                         :<div className="pt-3"></div>}
-                        
-                        {props.filteredRoutes.map(a => a.departamento).filter(onlyUnique).map((depto, deptoIndex) => (
+                        {
+                            props.results.filter(nameFilter).map((ruta, index, parentElement)=>
+                                <div className="pt-2">
+                                    <li key={index}>
+                                    <Checkbox label={ruta.nombreRuta} codigo={ruta.codigoRuta} value={ruta.shown} handleCheck={props.handleCheck}/>
+                                    </li>
+                                </div>
+                            )
+                        }
+                        {/**props.filteredRoutes.map(a => a.departamento).filter(onlyUnique).map((depto, deptoIndex) => (
                             <div key={deptoIndex}>
                                 <span>{depto}</span>
                                 {props.filteredRoutes.filter(r=>r.departamento === depto).map((ruta, index,self)=>
@@ -48,10 +60,9 @@ function Sidebar(props){
                                     </div>
                                 )}
                             </div>
-                        ))}
+                        )) */}
                     </ul>
                 </div>
-                {/**<div className="absolute bg-white bottom-0 h-8 w-full">Amalgamo</div> */}
             </div>
         </Menu>
     )
