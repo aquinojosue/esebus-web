@@ -10,15 +10,18 @@ import FooterLegend from './Components/FooterLegend';
 import useWindowDimensions from './Hooks/useWindowDimensions';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import LoadingOverlay from './Components/LoadingOverlay';
 
 
 export default function App() {
     const [results, setResults] = useState([]);
     const [checkAll, setCheckAll] = useState(false);
     const [searchFilter, setFilter] = useState('');
+    const [loading, setLoading] = useState(false);
 
     async function handleCheck(codigo){
         var index = results.findIndex(route=>route.codigoRuta === codigo);
+        setLoading(true);
         const newResult = {...results[index]};
         if(!newResult.shown && !newResult.colorIda){
             const {data} = await axios.get("https://elesteam.com/esebus/api/getRuta.php", {
@@ -27,6 +30,7 @@ export default function App() {
                 }
             });
             newResult = {...data[0]}
+            setLoading(false);
         }
         
         if(checkAll && newResult.shown) setCheckAll(false);
@@ -35,6 +39,7 @@ export default function App() {
         var newResults = [...results];
         newResults[index] = newResult;
         setResults(newResults);
+        setLoading(false);
     }
 
     useEffect(()=>{
@@ -43,6 +48,7 @@ export default function App() {
 
     async function handleAllCheck(){
         const newState = !checkAll;
+        setLoading(true);
         if(newState && results.filter(r=>r.colorIda).length != results.length){
             await axios.get("https://elesteam.com/esebus/api/getRuta.php", {
                 params: {
@@ -54,6 +60,7 @@ export default function App() {
                     return ruta;
                 });
                 setResults(newData);
+                setLoading(false);
             })
         }else{
             const newRoutes = [...results].map((ruta)=>{
@@ -61,6 +68,7 @@ export default function App() {
                 return ruta;
             });
             setResults(newRoutes)
+            setLoading(false);
         }
     }
 
@@ -100,14 +108,17 @@ export default function App() {
     const { height } = useWindowDimensions();
 
     return (
-        <div class="flex flex-col" style={{height: height}}>
-            <Sidebar {...sidebarParams} />
-            <Card routes={results.filter(r=>r.shown)}/>
-            <main class="flex-grow h-full" id="page-wrap">
-            <ToastContainer />
-                <Mapa routes={results}/>
-            </main>
-            <FooterLegend routes={results.filter(r=>r.shown)}/>
+        <div>
+            <LoadingOverlay loading={loading}/>
+            <div class="flex flex-col" style={{height: height}}>
+                <Sidebar {...sidebarParams} />
+                <Card routes={results.filter(r=>r.shown)}/>
+                <main class="flex-grow h-full" id="page-wrap">
+                <ToastContainer />
+                    <Mapa routes={results}/>
+                </main>
+                <FooterLegend routes={results.filter(r=>r.shown)}/>
+            </div>
         </div>
     );
 }

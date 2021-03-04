@@ -142,4 +142,5 @@ input:checked + svg {
   scrollbar-width: none; /* Firefox */
   -ms-overflow-style: none;  /* IE 10+ */
 }
- .footerdiv{position:fixed; left:0; right:0; bottom:0; z-index:777}
+.footerdiv{position:fixed; left:0; right:0; bottom:0; z-index:777}
+.loadingOverlay{z-index:1337}
