@@ -40,25 +40,20 @@ function Sidebar(props){
                                 <Checkbox label="Show All" handleCheck={props.handleAllCheck} value={props.checkAll}/>
                             </li>
                         :<div className="pt-3"></div>}
-                        {
-                            props.results.filter(nameFilter).map((ruta, index, parentElement)=>
-                                <li key={index} className={index===0?"pt-3":""}>
-                                    <Checkbox label={ruta.nombreRuta} codigo={ruta.codigoRuta} value={ruta.shown} handleCheck={props.handleCheck}/>
-                                </li>
-                            )
-                        }
-                        {/**props.filteredRoutes.map(a => a.departamento).filter(onlyUnique).map((depto, deptoIndex) => (
+                        {props.results.filter(nameFilter).map(a => a.departamento).filter(onlyUnique).map((depto, deptoIndex) => (
                             <div key={deptoIndex}>
-                                <span>{depto}</span>
-                                {props.filteredRoutes.filter(r=>r.departamento === depto).map((ruta, index,self)=>
-                                    <div className="pt-2">
+                                <p className="text-gray-500 text-opacity-75">{depto}</p>
+                                {props.results.filter(r=>r.departamento === depto).filter(nameFilter).map((ruta, index)=>
+                                    <div className="pt-1">
                                         <li key={index}>
-                                        <Checkbox label={ruta.nombreRuta} handleCheck={props.handleCheck} parentElement={self} index={index} value={ruta.shown}/>
+                                            <li key={index}>
+                                                <Checkbox label={ruta.nombreRuta} codigo={ruta.codigoRuta} value={ruta.shown} handleCheck={props.handleCheck}/>
+                                            </li>
                                         </li>
                                     </div>
                                 )}
                             </div>
-                        )) */}
+                        )) }
                     </ul>
                 </div>
             </div>
