@@ -16,9 +16,6 @@ export default function Mapa(props) {
   });
 
   const newLocation = useGeolocation();
-  function changeCoordinates(ruta){
-    return []
-  }
   function localizar() {
     if (newLocation.loaded && !newLocation.error) {
       setLocation({
