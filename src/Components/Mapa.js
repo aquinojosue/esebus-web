@@ -16,7 +16,9 @@ export default function Mapa(props) {
   });
 
   const newLocation = useGeolocation();
-  
+  function changeCoordinates(ruta){
+    return []
+  }
   function localizar() {
     if (newLocation.loaded && !newLocation.error) {
       setLocation({
@@ -38,38 +40,38 @@ export default function Mapa(props) {
           attribution="&copy; Elesteam"
           url={newUrl}
         />
-        {props.routes ?
-          props.routes.map((ruta, index)=>{
-           /* For some reason this breaks if I send a filtered list. */
+        {props.filteredRoutes ?
+          props.filteredRoutes.map((ruta, index)=>{
             return(
-                (ruta.shown)?
-                    <div key={index}>
-                        <Polyline
+                <div key={index}>
+                    <Polyline
                         color={ruta.colorVuelta}
+                        key={ruta.codigoRuta+"_ida_"+Math.random()}
                         positions={[
                             ruta.rutaVuelta.map((direccion) => [direccion[1], direccion[0]])
                         ]}
                         weight="5"
                         smoothFactor="7"
-                        >
-                            <Popup>
-                                <strong>{ruta.nombreRuta}</strong> Ida
-                            </Popup>
-                        </Polyline>
-                        <Polyline
-                        color={ruta.colorIda}
-                        positions={[
-                            ruta.rutaIda.map((direccion) => [direccion[1], direccion[0]])
-                        ]}
-                        smoothFactor="7"
-                        weight="5"
-                        >
-                            <Popup>
-                                <strong>{ruta.nombreRuta}</strong> Vuelta
-                            </Popup>
-                        </Polyline>
-                    </div>
-                :""
+                    >
+                        <Popup>
+                            <strong>{ruta.nombreRuta}</strong> Ida
+                        </Popup>
+                    </Polyline>
+                    <Polyline
+                    color={ruta.colorIda}
+                    
+                    key={ruta.codigoRuta+"_vuelta_"+Math.random()}
+                    positions={[
+                        ruta.rutaIda.map((direccion) => [direccion[1], direccion[0]])
+                    ]}
+                    smoothFactor="7"
+                    weight="5"
+                    >
+                        <Popup>
+                            <strong>{ruta.nombreRuta}</strong> Vuelta
+                        </Popup>
+                    </Polyline>
+                </div>
             )
           })
         :""}

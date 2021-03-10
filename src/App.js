@@ -106,18 +106,18 @@ export default function App() {
     }
 
     const { height } = useWindowDimensions();
-
+    const filteredRoutes = results.filter(r=>r.shown);
     return (
         <div>
             <LoadingOverlay loading={loading}/>
             <div class="flex flex-col" style={{height: height}}>
                 <Sidebar {...sidebarParams} />
-                <Card routes={results.filter(r=>r.shown)}/>
+                <Card routes={filteredRoutes}/>
                 <main class="flex-grow h-full" id="page-wrap">
                 <ToastContainer />
-                    <Mapa routes={results}/>
+                    <Mapa filteredRoutes={filteredRoutes}/>
                 </main>
-                <FooterLegend routes={results.filter(r=>r.shown)}/>
+                <FooterLegend routes={filteredRoutes}/>
             </div>
         </div>
     );
