@@ -8,6 +8,7 @@ import {
   Popup
 } from "react-leaflet";
 import RouteInfo from './RouteInfo'
+import L from 'leaflet';
 
 export default function Mapa(props) {
   const [location, setLocation] = useState({
@@ -42,11 +43,9 @@ export default function Mapa(props) {
             return(
                 <div key={index}>
                     <Polyline
-                        color={ruta.colorVuelta}
+                        color={ruta.colorIda}
                         key={ruta.codigoRuta+"_ida_"+Math.random()}
-                        positions={[
-                            ruta.rutaVuelta.map((direccion) => [direccion[1], direccion[0]])
-                        ]}
+                        positions={L.GeoJSON.coordsToLatLngs(ruta.rutaIda,Array.isArray(ruta.rutaIda[0][0])?1:0)}
                         weight="5"
                         smoothFactor="7"
                     >
@@ -55,12 +54,9 @@ export default function Mapa(props) {
                         </Popup>
                     </Polyline>
                     <Polyline
-                    color={ruta.colorIda}
-                    
+                    color={ruta.colorVuelta}
                     key={ruta.codigoRuta+"_vuelta_"+Math.random()}
-                    positions={[
-                        ruta.rutaIda.map((direccion) => [direccion[1], direccion[0]])
-                    ]}
+                    positions={L.GeoJSON.coordsToLatLngs(ruta.rutaVuelta,Array.isArray(ruta.rutaVuelta[0][0])?1:0)}
                     smoothFactor="7"
                     weight="5"
                     >
