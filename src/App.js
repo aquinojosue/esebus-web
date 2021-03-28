@@ -24,7 +24,7 @@ export default function App() {
         setLoading(true);
         const newResult = {...results[index]};
         if(!newResult.shown && !newResult.colorIda){
-            const {data} = await axios.get("https://elesteam.com/esebus/api/getRuta.php", {
+            const {data} = await axios.get(process.env.REACT_APP_API_URL + "ruta", {
                 params: {
                     codigoRuta: codigo
                 }
@@ -50,7 +50,7 @@ export default function App() {
         const newState = !checkAll;
         setLoading(true);
         if(newState && results.filter(r=>r.colorIda).length != results.length){
-            await axios.get("https://elesteam.com/esebus/api/getRuta.php", {
+            await axios.get(process.env.REACT_APP_API_URL + "ruta", {
                 params: {
                     bulk: true
                 }
@@ -78,7 +78,7 @@ export default function App() {
 
     useEffect(() => {
         axios
-            .get("https://elesteam.com/esebus/api/")
+            .get(process.env.REACT_APP_API_URL)
             .then(function (response) {
                 setResults(response.data);
             })
