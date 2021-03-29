@@ -50,14 +50,17 @@ export default function App() {
         const newState = !checkAll;
         setLoading(true);
         if(newState && results.filter(r=>r.colorIda).length != results.length){
+            var remainingRoutes = results.filter(r=>!r.shown).map(r=>(r.codigoRuta))
             await axios.get(process.env.REACT_APP_API_URL + "ruta", {
                 params: {
-                    bulk: true
+                    rutas: remainingRoutes
                 }
             }).then(response=>{
-                const newData = [...response.data].map((ruta)=>{
+                const newData = [...results];
+                response.data.forEach((ruta)=>{
+                    var index = results.findIndex(route=>route.codigoRuta === ruta.codigoRuta);
                     ruta.shown = newState;
-                    return ruta;
+                    newData[index] = ruta;
                 });
                 setResults(newData);
                 setLoading(false);
